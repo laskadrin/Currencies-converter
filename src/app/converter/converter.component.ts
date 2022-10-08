@@ -15,18 +15,15 @@ export class ConverterComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrencies();
 
-
   }
 
   async getCurrencies() {
     const responce = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
     const data = await responce.json();
     const currenciesInfo = await data;
-    this.usdRate = currenciesInfo.find((currency: any) => currency.cc == 'USD').rate
-    this.eurRate = currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate
     this.rates = {
-      'EUR': this.eurRate,
-      'USD': this.usdRate,
+      'EUR': currenciesInfo.find((currency: any) => currency.cc == 'USD').rate,
+      'USD': currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate,
       'UAH': 1
     }
 
@@ -43,7 +40,6 @@ export class ConverterComponent implements OnInit {
   onSelectRight(event: any) {
     this.selectRight = event;
     this.rightLeftCalculate();
-
   }
   onInputLeft(event: any) {
     this.inputLeft = parseFloat(event.target.value);
