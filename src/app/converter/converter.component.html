@@ -44,7 +44,7 @@
                 <h4>Оберіть валюту, яку купуєте:</h4>
                 <mat-form-field appearance="fill">
                     <mat-label>Валюта</mat-label>
-                    <mat-select [(value)]="selectRight" (selectionChange)="onSelectRight($event)">
+                    <mat-select [(value)]="selectRight" (valueChange)="onSelectRight($event)">
                         <mat-option value="UAH">UAH</mat-option>
                         <mat-option value="USD">USD</mat-option>
                         <mat-option value="EUR">EUR</mat-option>

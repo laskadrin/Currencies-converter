@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ConverterComponent implements OnInit {
   usdRate: number = 0;
   eurRate: number = 0;
+  rates: { [name in string]: number } = {}
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +24,12 @@ export class ConverterComponent implements OnInit {
     const currenciesInfo = await data;
     this.usdRate = currenciesInfo.find((currency: any) => currency.cc == 'USD').rate
     this.eurRate = currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate
+    this.rates = {
+      'EUR': this.eurRate,
+      'USD': this.usdRate,
+      'UAH': 1
+    }
+
   }
   selectLeft = 'UAH';
   selectRight = 'USD';
@@ -31,15 +38,36 @@ export class ConverterComponent implements OnInit {
 
   onSelectLeft(event: any) {
     this.selectLeft = event;
+    this.leftRightCalculate()
   }
   onSelectRight(event: any) {
     this.selectRight = event;
+    this.rightLeftCalculate();
+
   }
   onInputLeft(event: any) {
-    this.inputLeft = parseFloat(event.target.value)
+    this.inputLeft = parseFloat(event.target.value);
+    this.leftRightCalculate()
   }
   onInputRight(event: any) {
     this.inputRight = parseFloat(event.target.value)
+    this.rightLeftCalculate()
+  }
+  leftRightCalculate() {
+    if (this.selectLeft == 'UAH') {
+      this.inputRight = this.inputLeft / (this.rates[this.selectRight])
+    }
+    if (this.selectLeft == 'USD' || this.selectLeft == 'EUR') {
+      this.inputRight = this.inputLeft * this.rates[this.selectLeft] / this.rates[this.selectRight]
+    }
+  }
+  rightLeftCalculate() {
+    if (this.selectRight == 'UAH') {
+      this.inputLeft = this.inputRight / (this.rates[this.selectLeft])
+    }
+    if (this.selectRight == 'USD' || this.selectRight == 'EUR') {
+      this.inputLeft = this.inputRight * this.rates[this.selectRight] / this.rates[this.selectLeft]
+    }
   }
 
 } 
