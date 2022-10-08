@@ -1,0 +1,61 @@
+<div class="main">
+    <h2>Актуальний курс:</h2>
+    <div class="currency-rates">
+
+        <div class="rates">
+            <div class="box">
+                <h4>Курс USD:</h4>
+                <span>{{usdRate.toFixed(2)}}</span>
+            </div>
+            <div class="box">
+                <h4>Курс EUR: </h4>
+                <span>{{eurRate.toFixed(2)}}</span>
+            </div>
+        </div>
+        <div class="refresh">
+
+            <button class="btn" (click)="getCurrencies()"> Оновити </button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <h2>Конвертація:</h2>
+    <div class="converter">
+
+        <div class="box">
+            <form>
+                <h4>Оберіть валюту, яку продаєте:</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Валюта</mat-label>
+                    <mat-select [(value)]="selectLeft" (valueChange)="onSelectLeft($event)">
+                        <mat-option value="UAH">UAH</mat-option>
+                        <mat-option value="USD">USD</mat-option>
+                        <mat-option value="EUR">EUR</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" min="0" value="{{inputLeft.toFixed(2)}}"
+                        (input)="onInputLeft($event)">
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div class="box">
+            <form>
+                <h4>Оберіть валюту, яку купуєте:</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Валюта</mat-label>
+                    <mat-select [(value)]="selectRight" (selectionChange)="onSelectRight($event)">
+                        <mat-option value="UAH">UAH</mat-option>
+                        <mat-option value="USD">USD</mat-option>
+                        <mat-option value="EUR">EUR</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" min="0" value="{{inputRight.toFixed(2)}}"
+                        (input)="onInputRight($event)">
+                </mat-form-field>
+            </form>
+        </div>
+
+    </div>
+</div>

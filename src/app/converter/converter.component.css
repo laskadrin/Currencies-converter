@@ -1,0 +1,79 @@
+.main {
+    border: 3px solid gray;
+    border-radius: 20px;
+    width: 60vw;
+
+    margin: auto;
+    top: 10;
+    padding-bottom: 20px;
+
+}
+
+h2 {
+    text-align: center;
+}
+
+.currency-rates {
+    margin-bottom: 20px;
+}
+
+.refresh {
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.rates {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.box {
+    border: 2px solid grey;
+    padding: 10px 30px 25px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.converter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+
+
+.btn {
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: RoyalBlue;
+}
