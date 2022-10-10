@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -9,11 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class ConverterComponent implements OnInit {
   usdRate: number = 0;
   eurRate: number = 0;
+  ratesToShow: [string, string, string] = ['USD', 'EUR', 'UAH'];
   rates: { [name in string]: number } = {}
+  fakeArr = new Array(2);
   constructor() { }
 
   ngOnInit(): void {
     this.getCurrencies();
+    const obs$ = interval(600000);
+    obs$.subscribe(() => this.getCurrencies())
+
 
   }
 
@@ -21,48 +27,50 @@ export class ConverterComponent implements OnInit {
     const responce = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
     const data = await responce.json();
     const currenciesInfo = await data;
+
     this.rates = {
-      'EUR': currenciesInfo.find((currency: any) => currency.cc == 'USD').rate,
-      'USD': currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate,
+
+      'EUR': currenciesInfo.find((currency: any) => currency.cc == 'USD').rate.toFixed(2),
+      'USD': currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate.toFixed(2),
       'UAH': 1
     }
 
   }
-  selectLeft = 'UAH';
-  selectRight = 'USD';
-  inputLeft: number = 0;
-  inputRight: number = 0;
+  selectSell = 'UAH';
+  selectBuy = 'USD';
+  inputSell: number = 0;
+  inputBuy: number = 0;
 
-  onSelectLeft(event: any) {
-    this.selectLeft = event;
+  onSelectSell(event: any) {
+    this.selectSell = event;
     this.leftRightCalculate()
   }
-  onSelectRight(event: any) {
-    this.selectRight = event;
+  onSelectBuy(event: any) {
+    this.selectBuy = event;
     this.rightLeftCalculate();
   }
-  onInputLeft(event: any) {
-    this.inputLeft = parseFloat(event.target.value);
+  onInputSell(event: any) {
+    this.inputSell = parseFloat(event.target.value);
     this.leftRightCalculate()
   }
-  onInputRight(event: any) {
-    this.inputRight = parseFloat(event.target.value)
+  onInputBuy(event: any) {
+    this.inputBuy = parseFloat(event.target.value);
     this.rightLeftCalculate()
   }
   leftRightCalculate() {
-    if (this.selectLeft == 'UAH') {
-      this.inputRight = this.inputLeft / (this.rates[this.selectRight])
+    if (this.selectSell == 'UAH') {
+      this.inputBuy = this.inputSell / (this.rates[this.selectBuy])
     }
-    if (this.selectLeft == 'USD' || this.selectLeft == 'EUR') {
-      this.inputRight = this.inputLeft * this.rates[this.selectLeft] / this.rates[this.selectRight]
+    if (this.selectSell == 'USD' || this.selectSell == 'EUR') {
+      this.inputBuy = this.inputSell * this.rates[this.selectSell] / this.rates[this.selectBuy]
     }
   }
   rightLeftCalculate() {
-    if (this.selectRight == 'UAH') {
-      this.inputLeft = this.inputRight / (this.rates[this.selectLeft])
+    if (this.selectBuy == 'UAH') {
+      this.inputSell = this.inputBuy / (this.rates[this.selectSell])
     }
-    if (this.selectRight == 'USD' || this.selectRight == 'EUR') {
-      this.inputLeft = this.inputRight * this.rates[this.selectRight] / this.rates[this.selectLeft]
+    if (this.selectBuy == 'USD' || this.selectBuy == 'EUR') {
+      this.inputSell = this.inputBuy * this.rates[this.selectBuy] / this.rates[this.selectSell]
     }
   }
 
