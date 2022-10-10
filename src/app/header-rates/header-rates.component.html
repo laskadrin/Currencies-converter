@@ -4,7 +4,7 @@
     <div class="rates">
         <div class="box" *ngFor="let rateName of ratesApiService.ratesToShow.slice(0,-1)">
             <h4>Курс {{rateName}}:</h4>
-            <span>{{ratesApiService.rates[rateName]}}</span>
+            <span>{{ratesApiService.rates.get(rateName)}}</span>
         </div>
     </div>
 

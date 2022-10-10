@@ -5,8 +5,9 @@ import { interval } from 'rxjs';
   providedIn: 'root'
 })
 export class RatesApiService {
-  ratesToShow: [string, string, string] = ['USD', 'EUR', 'UAH'];
-  rates: { [name in string]: number } = {}
+  ratesToShow: [string, string, string] = ["USD", "EUR", "UAH"];
+
+  rates = new Map();
 
   constructor() { }
 
@@ -15,13 +16,12 @@ export class RatesApiService {
     const data = await response.json();
     const currenciesInfo = await data;
 
-    this.rates = {
+    this.ratesToShow.slice(0, -1).forEach((rateName) => {
 
-      'EUR': currenciesInfo.find((currency: any) => currency.cc == 'USD').rate.toFixed(2),
-      'USD': currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate.toFixed(2),
-      'UAH': 1
-    }
+      this.rates.set(rateName, currenciesInfo.find((currency: any) => currency.cc == rateName).rate.toFixed(2));
 
+    })
+    return this.rates;
   }
   refreshingGetCurrencies() {
     this.getCurrencies();

@@ -17,7 +17,7 @@ export class ConverterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ratesApiService.refreshingGetCurrencies();
+
   }
 
 
@@ -44,18 +44,18 @@ export class ConverterComponent implements OnInit {
   }
   sellToBuyCalculate() {
     if (this.currencyToSell == 'UAH') {
-      this.amountToBuy = this.amountToSell / (this.ratesApiService.rates[this.currencyToBuy])
+      this.amountToBuy = this.amountToSell / (this.ratesApiService.rates.get(this.currencyToBuy))
     }
     if (this.currencyToSell == 'USD' || this.currencyToSell == 'EUR') {
-      this.amountToBuy = this.amountToSell * this.ratesApiService.rates[this.currencyToSell] / this.ratesApiService.rates[this.currencyToBuy]
+      this.amountToBuy = this.amountToSell * this.ratesApiService.rates.get(this.currencyToSell) / this.ratesApiService.rates.get(this.currencyToBuy)
     }
   }
   buyToSellCalculate() {
     if (this.currencyToBuy == 'UAH') {
-      this.amountToSell = this.amountToBuy / (this.ratesApiService.rates[this.currencyToSell])
+      this.amountToSell = this.amountToBuy / (this.ratesApiService.rates.get(this.currencyToSell))
     }
     if (this.currencyToBuy == 'USD' || this.currencyToBuy == 'EUR') {
-      this.amountToSell = this.amountToBuy * this.ratesApiService.rates[this.currencyToBuy] / this.ratesApiService.rates[this.currencyToSell]
+      this.amountToSell = this.amountToBuy * this.ratesApiService.rates.get(this.currencyToBuy) / this.ratesApiService.rates.get(this.currencyToSell)
     }
   }
 

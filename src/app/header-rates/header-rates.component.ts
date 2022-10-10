@@ -12,7 +12,7 @@ export class HeaderRatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ratesApiService.refreshingGetCurrencies();
+
   }
 
 }
