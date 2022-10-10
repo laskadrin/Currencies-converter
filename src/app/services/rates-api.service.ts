@@ -21,7 +21,7 @@ export class RatesApiService {
       this.rates.set(rateName, currenciesInfo.find((currency: any) => currency.cc == rateName).rate.toFixed(2));
 
     })
-    return this.rates;
+
   }
   refreshingGetCurrencies() {
     this.getCurrencies();

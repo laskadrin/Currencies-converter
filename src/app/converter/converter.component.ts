@@ -23,7 +23,7 @@ export class ConverterComponent implements OnInit {
 
   currencyToSell = 'UAH';
   currencyToBuy = 'USD';
-  amountToSell: number = 0;
+  amountToSell: number = 0.;
   amountToBuy: number = 0;
 
   onCurrencySellChange(event: any) {
@@ -43,7 +43,10 @@ export class ConverterComponent implements OnInit {
     this.buyToSellCalculate()
   }
   sellToBuyCalculate() {
-    if (this.currencyToSell == 'UAH') {
+    if (this.currencyToSell == 'UAH' && this.currencyToBuy == 'UAH') {
+      this.amountToBuy = this.amountToSell
+    }
+    if (this.currencyToSell == 'UAH' && this.currencyToBuy != 'UAH') {
       this.amountToBuy = this.amountToSell / (this.ratesApiService.rates.get(this.currencyToBuy))
     }
     //Подвійна конвертація, так як курс відносно гривні отримується
@@ -55,7 +58,10 @@ export class ConverterComponent implements OnInit {
     }
   }
   buyToSellCalculate() {
-    if (this.currencyToBuy == 'UAH') {
+    if (this.currencyToBuy == 'UAH' && this.currencyToSell == 'UAH') {
+      this.amountToSell = this.amountToBuy
+    }
+    if (this.currencyToBuy == 'UAH' && this.currencyToSell != 'UAH') {
       this.amountToSell = this.amountToBuy / (this.ratesApiService.rates.get(this.currencyToSell))
     }
     //Подвійна конвертація, так як курс відносно гривні отримується

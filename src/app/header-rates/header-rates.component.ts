@@ -10,6 +10,7 @@ export class HeaderRatesComponent implements OnInit {
   constructor(
     public ratesApiService: RatesApiService
   ) { }
+  rates = this.ratesApiService.rates;
 
   ngOnInit(): void {
 
