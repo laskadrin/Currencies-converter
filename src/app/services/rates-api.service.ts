@@ -13,8 +13,8 @@ export class RatesApiService {
 
   async getCurrencies() {
     const response = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
-    const currenciesInfo = await response.json();
-
+    const data = await response.json();
+    const currenciesInfo = await data;
 
     this.ratesToShow.slice(0, -1).forEach((rateName) => {
 

@@ -49,6 +49,9 @@ export class ConverterComponent implements OnInit {
     if (this.currencyToSell == 'USD' || this.currencyToSell == 'EUR') {
       this.amountToBuy = this.amountToSell * this.ratesApiService.rates.get(this.currencyToSell) / this.ratesApiService.rates.get(this.currencyToBuy)
     }
+    if ((this.currencyToSell == 'USD' || this.currencyToSell == 'EUR') && this.currencyToBuy == 'UAH') {
+      this.amountToBuy = this.amountToSell * this.ratesApiService.rates.get(this.currencyToSell)
+    }
   }
   buyToSellCalculate() {
     if (this.currencyToBuy == 'UAH') {
@@ -56,6 +59,9 @@ export class ConverterComponent implements OnInit {
     }
     if (this.currencyToBuy == 'USD' || this.currencyToBuy == 'EUR') {
       this.amountToSell = this.amountToBuy * this.ratesApiService.rates.get(this.currencyToBuy) / this.ratesApiService.rates.get(this.currencyToSell)
+    }
+    if ((this.currencyToBuy == 'USD' || this.currencyToBuy == 'EUR') && this.currencyToSell == 'UAH') {
+      this.amountToSell = this.amountToBuy * this.ratesApiService.rates.get(this.currencyToBuy)
     }
   }
 
