@@ -26,19 +26,19 @@ export class ConverterComponent implements OnInit {
   amountToSell: number = 0;
   amountToBuy: number = 0;
 
-  onSelectSell(event: any) {
+  onCurrencySellChange(event: any) {
     this.currencyToSell = event;
     this.sellToBuyCalculate()
   }
-  onSelectBuy(event: any) {
+  onCurrencyBuyChange(event: any) {
     this.currencyToBuy = event;
     this.buyToSellCalculate();
   }
-  onInputSell(event: any) {
+  onAmountSellChange(event: any) {
     this.amountToSell = parseFloat(event.target.value);
     this.sellToBuyCalculate()
   }
-  onInputBuy(event: any) {
+  onAmountBuyChange(event: any) {
     this.amountToBuy = parseFloat(event.target.value);
     this.buyToSellCalculate()
   }
