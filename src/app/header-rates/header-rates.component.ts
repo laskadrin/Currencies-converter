@@ -4,7 +4,7 @@ import { RatesApiService } from '../services/rates-api.service';
 @Component({
   selector: 'app-header-rates',
   templateUrl: './header-rates.component.html',
-  styleUrls: ['./header-rates.component.css']
+  styleUrls: ['./../app.component.css']
 })
 export class HeaderRatesComponent implements OnInit {
   constructor(

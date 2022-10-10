@@ -6,3 +6,28 @@
     padding-bottom: 20px;
 
 }
+
+h2 {
+    text-align: center;
+}
+
+.currency-rates {
+    margin-bottom: 20px;
+}
+
+
+
+.rates {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.box {
+    border: 2px solid grey;
+    padding: 10px 30px 25px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}

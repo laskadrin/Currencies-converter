@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
-
 import { RatesApiService } from '../services/rates-api.service';
 
 
@@ -8,7 +6,7 @@ import { RatesApiService } from '../services/rates-api.service';
 @Component({
   selector: 'app-converter',
   templateUrl: './converter.component.html',
-  styleUrls: ['./converter.component.css']
+  styleUrls: ['./converter.component.css', './../app.component.css']
 })
 export class ConverterComponent implements OnInit {
 
