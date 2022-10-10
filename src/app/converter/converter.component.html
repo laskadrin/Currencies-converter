@@ -6,19 +6,19 @@
             <h4 *ngIf="index == 1">Оберіть валюту, яку купуєте:</h4>
             <mat-form-field appearance="fill">
                 <mat-label>Валюта</mat-label>
-                <mat-select *ngIf="index == 0" [(value)]="selectSell" (valueChange)="onSelectSell($event)">
+                <mat-select *ngIf="index == 0" [(value)]="currencyToSell" (valueChange)="onSelectSell($event)">
                     <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
                     </mat-option>
                 </mat-select>
-                <mat-select *ngIf="index == 1" [(value)]="selectBuy" (valueChange)="onSelectBuy($event)">
+                <mat-select *ngIf="index == 1" [(value)]="currencyToBuy" (valueChange)="onSelectBuy($event)">
                     <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <input *ngIf="index == 0" matInput type="number" min="0" value="{{inputSell.toFixed(2)}}"
+                <input *ngIf="index == 0" matInput type="number" min="0" value="{{amountToSell.toFixed(2)}}"
                     (input)="onInputSell($event)">
-                <input *ngIf="index == 1" matInput type="number" min="0" value="{{inputBuy.toFixed(2)}}"
+                <input *ngIf="index == 1" matInput type="number" min="0" value="{{amountToBuy.toFixed(2)}}"
                     (input)="onInputBuy($event)">
             </mat-form-field>
         </form>

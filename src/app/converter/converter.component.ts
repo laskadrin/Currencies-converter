@@ -21,41 +21,41 @@ export class ConverterComponent implements OnInit {
   }
 
 
-  selectSell = 'UAH';
-  selectBuy = 'USD';
-  inputSell: number = 0;
-  inputBuy: number = 0;
+  currencyToSell = 'UAH';
+  currencyToBuy = 'USD';
+  amountToSell: number = 0;
+  amountToBuy: number = 0;
 
   onSelectSell(event: any) {
-    this.selectSell = event;
+    this.currencyToSell = event;
     this.sellToBuyCalculate()
   }
   onSelectBuy(event: any) {
-    this.selectBuy = event;
+    this.currencyToBuy = event;
     this.buyToSellCalculate();
   }
   onInputSell(event: any) {
-    this.inputSell = parseFloat(event.target.value);
+    this.amountToSell = parseFloat(event.target.value);
     this.sellToBuyCalculate()
   }
   onInputBuy(event: any) {
-    this.inputBuy = parseFloat(event.target.value);
+    this.amountToBuy = parseFloat(event.target.value);
     this.buyToSellCalculate()
   }
   sellToBuyCalculate() {
-    if (this.selectSell == 'UAH') {
-      this.inputBuy = this.inputSell / (this.ratesApiService.rates[this.selectBuy])
+    if (this.currencyToSell == 'UAH') {
+      this.amountToBuy = this.amountToSell / (this.ratesApiService.rates[this.currencyToBuy])
     }
-    if (this.selectSell == 'USD' || this.selectSell == 'EUR') {
-      this.inputBuy = this.inputSell * this.ratesApiService.rates[this.selectSell] / this.ratesApiService.rates[this.selectBuy]
+    if (this.currencyToSell == 'USD' || this.currencyToSell == 'EUR') {
+      this.amountToBuy = this.amountToSell * this.ratesApiService.rates[this.currencyToSell] / this.ratesApiService.rates[this.currencyToBuy]
     }
   }
   buyToSellCalculate() {
-    if (this.selectBuy == 'UAH') {
-      this.inputSell = this.inputBuy / (this.ratesApiService.rates[this.selectSell])
+    if (this.currencyToBuy == 'UAH') {
+      this.amountToSell = this.amountToBuy / (this.ratesApiService.rates[this.currencyToSell])
     }
-    if (this.selectBuy == 'USD' || this.selectBuy == 'EUR') {
-      this.inputSell = this.inputBuy * this.ratesApiService.rates[this.selectBuy] / this.ratesApiService.rates[this.selectSell]
+    if (this.currencyToBuy == 'USD' || this.currencyToBuy == 'EUR') {
+      this.amountToSell = this.amountToBuy * this.ratesApiService.rates[this.currencyToBuy] / this.ratesApiService.rates[this.currencyToSell]
     }
   }
 

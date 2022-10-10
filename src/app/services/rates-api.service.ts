@@ -11,8 +11,8 @@ export class RatesApiService {
   constructor() { }
 
   async getCurrencies() {
-    const responce = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
-    const data = await responce.json();
+    const response = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
+    const data = await response.json();
     const currenciesInfo = await data;
 
     this.rates = {
