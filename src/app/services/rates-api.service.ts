@@ -5,7 +5,7 @@ import { interval } from 'rxjs';
   providedIn: 'root'
 })
 export class RatesApiService {
-  ratesToShow: [string, string, string] = ["USD", "EUR", "UAH"];
+  ratesToShow: [string, string, string] = ["USD", "EUR", "UAH"]; //UAH повинно бути останнім у списку для првильної роботи
 
   rates = new Map();
 
