@@ -1,0 +1,11 @@
+<h2>Актуальний курс:</h2>
+<div class="currency-rates">
+
+    <div class="rates">
+        <div class="box" *ngFor="let rateName of ratesApiService.ratesToShow.slice(0,-1)">
+            <h4>Курс {{rateName}}:</h4>
+            <span>{{ratesApiService.rates[rateName]}}</span>
+        </div>
+    </div>
+
+</div>

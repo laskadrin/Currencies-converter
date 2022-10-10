@@ -20,7 +20,6 @@ export class ConverterComponent implements OnInit {
 
   ngOnInit(): void {
     this.ratesApiService.refreshingGetCurrencies();
-
   }
 
 

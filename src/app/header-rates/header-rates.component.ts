@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RatesApiService } from '../services/rates-api.service';
 
 @Component({
   selector: 'app-header-rates',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-rates.component.css']
 })
 export class HeaderRatesComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    public ratesApiService: RatesApiService
+  ) { }
 
   ngOnInit(): void {
+    this.ratesApiService.refreshingGetCurrencies();
   }
 
 }

@@ -1,39 +1,26 @@
-<div class="main">
-    <h2>Актуальний курс:</h2>
-    <div class="currency-rates">
-
-        <div class="rates">
-            <div class="box" *ngFor="let rateName of ratesApiService.ratesToShow.slice(0,-1)">
-                <h4>Курс {{rateName}}:</h4>
-                <span>{{ratesApiService.rates[rateName]}}</span>
-            </div>
-        </div>
-
+<h2>Конвертація:</h2>
+<div class="converter">
+    <div class="box" *ngFor="let i of fakeArr; let index=index">
+        <form>
+            <h4 *ngIf="index == 0">Оберіть валюту, яку продаєте:</h4>
+            <h4 *ngIf="index == 1">Оберіть валюту, яку купуєте:</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>Валюта</mat-label>
+                <mat-select *ngIf="index == 0" [(value)]="selectSell" (valueChange)="onSelectSell($event)">
+                    <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
+                    </mat-option>
+                </mat-select>
+                <mat-select *ngIf="index == 1" [(value)]="selectBuy" (valueChange)="onSelectBuy($event)">
+                    <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <input *ngIf="index == 0" matInput type="number" min="0" value="{{inputSell.toFixed(2)}}"
+                    (input)="onInputSell($event)">
+                <input *ngIf="index == 1" matInput type="number" min="0" value="{{inputBuy.toFixed(2)}}"
+                    (input)="onInputBuy($event)">
+            </mat-form-field>
+        </form>
     </div>
-    <mat-divider></mat-divider>
-    <h2>Конвертація:</h2>
-    <div class="converter">
-        <div class="box" *ngFor="let i of fakeArr; let index=index">
-            <form>
-                <h4 *ngIf="index == 0">Оберіть валюту, яку продаєте:</h4>
-                <h4 *ngIf="index == 1">Оберіть валюту, яку купуєте:</h4>
-                <mat-form-field appearance="fill">
-                    <mat-label>Валюта</mat-label>
-                    <mat-select *ngIf="index == 0" [(value)]="selectSell" (valueChange)="onSelectSell($event)">
-                        <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-select *ngIf="index == 1" [(value)]="selectBuy" (valueChange)="onSelectBuy($event)">
-                        <mat-option *ngFor="let rateName of ratesApiService.ratesToShow" value={{rateName}}>{{rateName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <input *ngIf="index == 0" matInput type="number" min="0" value="{{inputSell.toFixed(2)}}"
-                        (input)="onInputSell($event)">
-                    <input *ngIf="index == 1" matInput type="number" min="0" value="{{inputBuy.toFixed(2)}}"
-                        (input)="onInputBuy($event)">
-                </mat-form-field>
-            </form>
-        </div>
-    </div>
+</div>
