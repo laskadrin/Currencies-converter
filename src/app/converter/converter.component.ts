@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 
+import { RatesApiService } from '../services/rates-api.service';
+
+
 
 @Component({
   selector: 'app-converter',
@@ -8,34 +11,19 @@ import { interval } from 'rxjs';
   styleUrls: ['./converter.component.css']
 })
 export class ConverterComponent implements OnInit {
-  usdRate: number = 0;
-  eurRate: number = 0;
-  ratesToShow: [string, string, string] = ['USD', 'EUR', 'UAH'];
-  rates: { [name in string]: number } = {}
+
   fakeArr = new Array(2);
-  constructor() { }
+  constructor(
+    public ratesApiService: RatesApiService,
+
+  ) { }
 
   ngOnInit(): void {
-    this.getCurrencies();
-    const obs$ = interval(600000);
-    obs$.subscribe(() => this.getCurrencies())
-
+    this.ratesApiService.refreshingGetCurrencies();
 
   }
 
-  async getCurrencies() {
-    const responce = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
-    const data = await responce.json();
-    const currenciesInfo = await data;
 
-    this.rates = {
-
-      'EUR': currenciesInfo.find((currency: any) => currency.cc == 'USD').rate.toFixed(2),
-      'USD': currenciesInfo.find((currency: any) => currency.cc == 'EUR').rate.toFixed(2),
-      'UAH': 1
-    }
-
-  }
   selectSell = 'UAH';
   selectBuy = 'USD';
   inputSell: number = 0;
@@ -43,34 +31,34 @@ export class ConverterComponent implements OnInit {
 
   onSelectSell(event: any) {
     this.selectSell = event;
-    this.leftRightCalculate()
+    this.sellToBuyCalculate()
   }
   onSelectBuy(event: any) {
     this.selectBuy = event;
-    this.rightLeftCalculate();
+    this.buyToSellCalculate();
   }
   onInputSell(event: any) {
     this.inputSell = parseFloat(event.target.value);
-    this.leftRightCalculate()
+    this.sellToBuyCalculate()
   }
   onInputBuy(event: any) {
     this.inputBuy = parseFloat(event.target.value);
-    this.rightLeftCalculate()
+    this.buyToSellCalculate()
   }
-  leftRightCalculate() {
+  sellToBuyCalculate() {
     if (this.selectSell == 'UAH') {
-      this.inputBuy = this.inputSell / (this.rates[this.selectBuy])
+      this.inputBuy = this.inputSell / (this.ratesApiService.rates[this.selectBuy])
     }
     if (this.selectSell == 'USD' || this.selectSell == 'EUR') {
-      this.inputBuy = this.inputSell * this.rates[this.selectSell] / this.rates[this.selectBuy]
+      this.inputBuy = this.inputSell * this.ratesApiService.rates[this.selectSell] / this.ratesApiService.rates[this.selectBuy]
     }
   }
-  rightLeftCalculate() {
+  buyToSellCalculate() {
     if (this.selectBuy == 'UAH') {
-      this.inputSell = this.inputBuy / (this.rates[this.selectSell])
+      this.inputSell = this.inputBuy / (this.ratesApiService.rates[this.selectSell])
     }
     if (this.selectBuy == 'USD' || this.selectBuy == 'EUR') {
-      this.inputSell = this.inputBuy * this.rates[this.selectBuy] / this.rates[this.selectSell]
+      this.inputSell = this.inputBuy * this.ratesApiService.rates[this.selectBuy] / this.ratesApiService.rates[this.selectSell]
     }
   }
 
